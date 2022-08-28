@@ -75,7 +75,8 @@ passport.deserializeUser(function (user, cb) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://rocky-plateau-17810.herokuapp.com/auth/google/secrets",
+    callbackURL: "/auth/google/secrets",
+    proxy: true,
     //userProfileURL: "http://www.googleapis.com/oauth2/v3/userinfo"
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -88,7 +89,8 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "https://rocky-plateau-17810.herokuapp.com/auth/facebook/secrets"
+    callbackURL: "/auth/facebook/secrets",
+    proxy: true,
 },
     function (accessToken, refreshToken, profile, cb) {
         User.findOrCreate({ username: profile.displayName, facebookId: profile.id }, function (err, user) {
